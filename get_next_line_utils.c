@@ -31,7 +31,7 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-char	*ft_strdup(char *str1)
+char	*ft_strdup(const char *str1)
 {
 	int		i;
 	char	*allocated;
@@ -102,7 +102,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	returned[len1 + i] = '\0';
     free(s1);
-	s1 = NULL;
 	return (returned);
 }
 void  protected_alloc(char **saved, char **allocated)
@@ -111,11 +110,7 @@ void  protected_alloc(char **saved, char **allocated)
     {    
         *saved = ft_strdup("");
         if (!*saved)
-		{
-			free(*saved);
-			*saved = NULL;
-			return ;
-		}
+            *saved = NULL;
     }
     *allocated = malloc((size_t) BUFFER_SIZE + 1);
     if (!*allocated)
@@ -125,7 +120,7 @@ void  protected_alloc(char **saved, char **allocated)
         *saved = NULL;
     }
 }   
-char    *ft_get_line(char **saved, int readen)
+char    *get_line(char **saved, int readen)
 {
     char *temp_saved;
     char *pos;
@@ -134,18 +129,10 @@ char    *ft_get_line(char **saved, int readen)
         temp_saved = *saved;
         pos = ft_strchr(temp_saved, '\n');
         *saved = ft_strdup(pos + 1);
-		if (!*saved)
-			return (free(*saved), *saved = NULL, NULL);
         *(pos + 1) = '\0';
         return (temp_saved);
     }
     temp_saved = ft_strdup(*saved);
-	if (!temp_saved)
-	{
-		free(*saved);
-		*saved = NULL;
-		return (NULL);
-	}
 	free(*saved);
     *saved = NULL;
     return (temp_saved);
