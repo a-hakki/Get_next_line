@@ -1,36 +1,32 @@
 #include "get_next_line.h"
-
 char *get_next_line(int fd)
 {
     static char *saved;
     char    *allocated;
     int         readen;
-    int           boole;
-
-    boole = 0;
+    if (fd < 0 || BUFFER_SIZE <= 0)
+        return (NULL);
     protected_alloc(&saved, &allocated);
-    // printf("\n*****2******\n");
+    if (!saved || !allocated)
+        return (free (saved), allocated = NULL, saved = NULL, NULL);
     readen = 1;
     while (!(ft_strchr(saved, '\n')) && readen > 0)
     {
-        // printf("\n*****3******\n");
         readen = read(fd, allocated, BUFFER_SIZE);
-        // printf("\n*****4******\n");
-        allocated[readen] = '\0';
         if (readen == 0)
             break;
         if (readen == -1)
-            return (free(allocated), free(saved), NULL);
+            return (free(allocated), allocated = NULL, free(saved), saved = NULL, NULL);
+        allocated[readen] = '\0';
         saved = ft_strjoin(saved, allocated);
-        // printf("\n*****5******\n");
         if (!saved)
-            return (free(allocated), free(saved), NULL);
-        // printf("\n*****6******\n");
+            return (free(allocated), free(saved),allocated = NULL, saved = NULL, NULL);
     }
     free(allocated);
+    allocated = NULL;
     if (ft_strcmp(saved, "") == 0)
-        return (free(saved), NULL);
-    return (get_line(&saved, readen));
+        return (free(saved), saved = NULL, NULL);
+    return (ft_get_line(&saved, readen));
 }
 
 int main()

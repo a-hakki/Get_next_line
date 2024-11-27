@@ -1,15 +1,14 @@
 #include "get_next_line.h"
-
 // TODO : get_line();
 // TODO : ft_join free and allocated empty
-
 char	*ft_strchr(const char *str, int search_str)
 {
 	int	i;
-
 	i = 0;
     if (!str)
+	{
         return (NULL);
+	}
 	while (str[i])
 	{
 		if (str[i] == (char)search_str)
@@ -23,10 +22,11 @@ char	*ft_strchr(const char *str, int search_str)
 size_t	ft_strlen(const char *str)
 {
 	int		i;
-
 	i = 0;
     if (!str)
-        return (0);
+    {
+	    return (0);
+	}
 	while (str[i])
 		i++;
 	return (i);
@@ -35,13 +35,16 @@ char	*ft_strdup(const char *str1)
 {
 	int		i;
 	char	*allocated;
-
 	i = 0;
     if (!str1)
-        return (NULL);
+    {    
+		return (NULL);
+	}
 	allocated = malloc(sizeof(char) * ft_strlen(str1) + 1);
 	if (!allocated)
+	{	
 		return (NULL);
+	}
 	while (str1[i])
 	{
 		allocated[i] = str1[i];
@@ -50,16 +53,16 @@ char	*ft_strdup(const char *str1)
 	allocated[i] = '\0';
 	return (allocated);
 }
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*returned;
 	size_t	slen;
-
 	i = 0;
 	if (!s)
+	{
 		return (NULL);
+	}
 	slen = ft_strlen(s);
 	if (len == 0 || start >= slen)
 		return (ft_strdup(""));
@@ -67,7 +70,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = slen - start;
 	returned = (char *)malloc(sizeof(char) * (len + 1));
 	if (!returned)
+	{
 		return (NULL);
+	}
 	while (i < len)
 	{
 		returned[i] = s[start + i];
@@ -76,14 +81,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	returned[i] = '\0';
 	return (returned);
 }
-
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		len1;
 	int		len2;
 	int		i;
 	char	*returned;
-
     if (!s1 && !s2)
 		return (NULL);             
 	i = -1;
@@ -102,6 +105,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	returned[len1 + i] = '\0';
     free(s1);
+	s1 = NULL;
 	return (returned);
 }
 void  protected_alloc(char **saved, char **allocated)
@@ -120,7 +124,7 @@ void  protected_alloc(char **saved, char **allocated)
         *saved = NULL;
     }
 }   
-char    *get_line(char **saved, int readen)
+char    *ft_get_line(char **saved, int readen)
 {
     char *temp_saved;
     char *pos;
@@ -140,7 +144,6 @@ char    *get_line(char **saved, int readen)
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
-
 	i = 0;
 	while (s1[i] && s2[i])
 	{
