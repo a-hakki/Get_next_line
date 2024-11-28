@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asoudani <asoudani@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/27 20:21:12 by asoudani          #+#    #+#             */
+/*   Updated: 2024/11/27 20:26:03 by asoudani         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 char	*ft_strchr(const char *str, int search_str)
@@ -5,9 +17,9 @@ char	*ft_strchr(const char *str, int search_str)
 	int	i;
 
 	i = 0;
-    if (!str)
+	if (!str)
 	{
-        return (NULL);
+		return (NULL);
 	}
 	while (str[i])
 	{
@@ -20,16 +32,15 @@ char	*ft_strchr(const char *str, int search_str)
 	return (NULL);
 }
 
-
 char	*ft_strdup(const char *str1)
 {
 	int		i;
 	char	*allocated;
 
 	i = 0;
-    if (!str1)
+	if (!str1)
 	{
-        return (NULL);
+		return (NULL);
 	}
 	allocated = malloc(sizeof(char) * ft_strlen(str1) + 1);
 	if (!allocated)
@@ -76,8 +87,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	char	*returned;
 
-    if (!s1 && !s2)
-		return (NULL);             
+	if (!s1 && !s2)
+		return (NULL);
 	i = -1;
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
@@ -93,9 +104,10 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	returned[len1 + i] = '\0';
-    free(s1);
+	free(s1);
 	return (returned);
 }
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
