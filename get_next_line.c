@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asoudani <asoudani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahakki <ahakki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 20:21:25 by asoudani          #+#    #+#             */
-/*   Updated: 2024/11/27 20:54:32 by asoudani         ###   ########.fr       */
+/*   Created: 2024/11/28 09:46:28 by ahakki            #+#    #+#             */
+/*   Updated: 2024/11/28 09:56:40 by ahakki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	protected_alloc(char **saved, char **allocated)
 	}
 }
 
-void	fireforce(char **saved, char **allocated)
+void	ft_free(char **saved, char **allocated)
 {
 	free(*saved);
 	*saved = NULL;
@@ -80,7 +80,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	protected_alloc(&saved, &allocated);
 	if (!saved || !allocated)
-		return (fireforce(&saved, &allocated), NULL);
+		return (ft_free(&saved, &allocated), NULL);
 	readen = 1;
 	while (!(ft_strchr(saved, '\n')) && readen > 0)
 	{
@@ -88,62 +88,13 @@ char	*get_next_line(int fd)
 		if (readen == 0)
 			break ;
 		if (readen == -1)
-			return (fireforce(&saved, &allocated), NULL);
+			return (ft_free(&saved, &allocated), NULL);
 		allocated[readen] = '\0';
 		saved = ft_strjoin(saved, allocated);
 		if (!saved)
-			return (fireforce(&saved, &allocated), NULL);
+			return (ft_free(&saved, &allocated), NULL);
 	}
 	if (ft_strcmp(saved, "") == 0)
-		return (fireforce(&saved, &allocated), NULL);
+		return (ft_free(&saved, &allocated), NULL);
 	return (free(allocated), ft_get_line(&saved, readen));
 }
-// int main()
-// {
-//     int i = 1;
-//     int fd = open("files.txt", O_RDONLY | O_CREAT, 0644);
-//     if (fd == -1)
-//         return (0);
-//     char *s = get_next_line(fd);
-//     printf("[%d] : %s", i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-//     s = get_next_line(fd);
-//     printf("[%d] : %s", ++i, s);
-//     free(s);
-// }

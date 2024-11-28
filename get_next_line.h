@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asoudani <asoudani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahakki <ahakki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 20:14:48 by asoudani          #+#    #+#             */
-/*   Updated: 2024/11/27 20:19:30 by asoudani         ###   ########.fr       */
+/*   Updated: 2024/11/28 09:51:52 by ahakki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	protected_alloc(char **saved, char **allocated);
 size_t	ft_strlen(const char *str);
 char	*ft_get_line(char **saved, int readen);
 int		ft_strcmp(char *s1, char *s2);
+void	ft_free(char **saved, char **allocated);
 
 #endif

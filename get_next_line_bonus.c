@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asoudani <asoudani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahakki <ahakki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 20:21:05 by asoudani          #+#    #+#             */
-/*   Updated: 2024/11/27 20:25:27 by asoudani         ###   ########.fr       */
+/*   Created: 2024/11/28 09:46:39 by ahakki            #+#    #+#             */
+/*   Updated: 2024/11/28 09:50:26 by ahakki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_get_line(char **saved, int readen)
 	return (temp_saved);
 }
 
-void	fireforce(char **saved, char **allocated)
+void	ft_free(char **saved, char **allocated)
 {
 	free(*saved);
 	*saved = NULL;
@@ -80,7 +80,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	protected_alloc(&saved[fd], &allocated);
 	if (!saved[fd] || !allocated)
-		return (fireforce(&saved[fd], &allocated), NULL);
+		return (ft_free(&saved[fd], &allocated), NULL);
 	readen = 1;
 	while (!(ft_strchr(saved[fd], '\n')) && readen > 0)
 	{
@@ -88,13 +88,13 @@ char	*get_next_line(int fd)
 		if (readen == 0)
 			break ;
 		if (readen == -1)
-			return (fireforce(&saved[fd], &allocated), NULL);
+			return (ft_free(&saved[fd], &allocated), NULL);
 		allocated[readen] = '\0';
 		saved[fd] = ft_strjoin(saved[fd], allocated);
 		if (!saved[fd])
-			return (fireforce(&saved[fd], &allocated), NULL);
+			return (ft_free(&saved[fd], &allocated), NULL);
 	}
 	if (ft_strcmp(saved[fd], "") == 0)
-		return (fireforce(&saved[fd], &allocated), NULL);
+		return (ft_free(&saved[fd], &allocated), NULL);
 	return (free(allocated), ft_get_line(&saved[fd], readen));
 }
